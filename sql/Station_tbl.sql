@@ -3,16 +3,16 @@ drop table if exists Station_tbl;
 
 create table Station_tbl (
   stationId int primary key,
-  stationName: varchar(300),
-  totalDocks: int,
-  latitude: double precision,
-  longitude: double precision,
-  stAddress1: varchar(300),
-  stAddress2: varchar(300),
-  city: varchar(200),
-  postalCode: varchar(10),
-  location: varchar(300),
-  altitude: double precision,
-  testStation: boolean,
-  landMark: varchar(300)
+  stationName varchar(300),
+  totalDocks int,
+  latitude double precision,
+  longitude double precision,
+  stAddress1 varchar(300),
+  stAddress2 varchar(300),
+  city varchar(200),
+  postalCode varchar(10),
+  location varchar(300),
+  altitude double precision,
+  testStation boolean,
+  landMark varchar(300)
 );
