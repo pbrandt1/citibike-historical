@@ -1,5 +1,5 @@
 /**
- * This file clears out station_tbl and inserts new values.
+ * This file looks for new stations and inserts them
  * @type {*}
  */
 var mgr = new require('../datamgr')();

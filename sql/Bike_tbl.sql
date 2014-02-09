@@ -2,8 +2,8 @@
 drop table if exists Bike_tbl;
 
 create table Bike_tbl (
-  stationId int references Station_tbl(stationId),
-  executionTime date,
-  availableDocks int,
-  availableBikes int
+  stationId smallint references Station_tbl(stationId),
+  executionTimeId smallint references Timestamp_tbl,
+  availableDocks smallint,
+  availableBikes smallint
 );

@@ -2,9 +2,9 @@
 drop table if exists Station_tbl;
 
 create table Station_tbl (
-  stationId int primary key,
+  stationId smallint primary key,
   stationName varchar(300),
-  totalDocks int,
+  totalDocks smallint,
   latitude double precision,
   longitude double precision,
   stAddress1 varchar(300),
