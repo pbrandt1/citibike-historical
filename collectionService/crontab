@@ -1,0 +1,3 @@
+00 00 * * * node /data/code/citibike-historical/collectionService/insertStations.js
+
+*/10 * * * * node /data/code/citibike-historical/collectionService/insertBikeData.js
