@@ -37,7 +37,7 @@ gotData
 				var promises = [];
 				var sql = 'insert into Bike_tbl (stationId, executionTimeId, availableDocks, availableBikes) values ($1, $2, $3, $4)';
 				_.forEach(body.stationBeanList, function(o) {
-					promises.push(mgr.query(sql, [o.id, executionTimeId, o.availableDocks, o.availableBikes]))
+					promises.push(mgr.query(sql, [o.id, executionTimeId, o.availableDocks, o.availableBikes]));
 				});
 				return q.all(promises);
 			});

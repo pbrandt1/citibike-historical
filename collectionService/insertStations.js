@@ -31,32 +31,30 @@ gotData
 .then(function(body) {
 		var promises = [];
 		var fields = 'stationId stationName totalDocks latitude longitude stAddress1 stAddress2 city postalCode location altitude testStation landMark'.split(' ');
-		var sql = 'insert into Station_tbl ($FieldNames) select $FieldIndexes where not exists (select 1 from Station_tbl where stationId = $stationId)'
+		var sql = 'insert into Station_tbl ($FieldNames) select $FieldIndexes where not exists (select 1 from Station_tbl where stationId = $1)'
 			.replace('$FieldNames', fields.join(', '))
 			.replace('$FieldIndexes', _.map(fields, function(o, i) {
 				return '$' + (i + 1);
-			}).join(', '))
-			.replace('$stationId', '$' + (fields.length + 1));
+			}).join(', '));
 
 		// do some data massaging
-		_.forEach(body.stationBeanList, function(o,i) {
-			o.stationId = o.id;
-			o.altitude = o.altitude || 0;
+		_.forEach(body.stationBeanList, function(station) {
+			station.stationId = station.id;
+			station.altitude = station.altitude || 0;
 		});
 
-		for (var i = 0, length = body.stationBeanList.length; i < length; i++) {
+		_.forEach(body.stationBeanList, function(station) {
 			var data = _.map(fields, function(o) {
-				return body.stationBeanList[i][o];
+				return station[o];
 			});
-			data.push(body.stationBeanList[i].stationId);
 			var p = mgr.query(sql, data)
 				.fail(function(err) {
 					console.log(err);
 				});
 			promises.push(p);
-		}
+		});
 
-		return q.all(p);
+		return q.all(promises);
 	})
 .then(function() {
 		process.exit(0);

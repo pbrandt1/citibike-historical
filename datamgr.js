@@ -24,7 +24,7 @@ module.exports = function (constring) {
 		});
 
 		return d.promise;
-	}
+	};
 
 	return this;
 };
