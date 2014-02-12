@@ -1,7 +1,13 @@
 <div id="map">
-    no map yet...
 </div>
 <div>
-    {{!-- line-chart width=500 height=300 data=daydata x="letter" y="frequency" --}}
-    {{line-chart width=800 height=500 data=bikeTotalsHistory x="date" y="bikesInUse"}}
+    <header>Bike Usage</header>
+    {{line-chart width=800 height=200 dataUrl="/bikeTotals" x="date" y="bikes_in_use"}}
+</div>
+<div>
+    {{#each content}}
+        <div>
+            {{stationname}}
+        </div>
+    {{/each}}
 </div>

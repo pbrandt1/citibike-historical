@@ -38,6 +38,8 @@ module.exports = function(grunt) {
       app.all(proxyPath + '/*', passThrough(proxyURL));
     }
 
+		app.use(require('../crAPI/crAPI'));
+
     if (target === 'debug') {
       // For `expressServer:debug`
 
