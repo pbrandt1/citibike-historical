@@ -103,7 +103,7 @@ export default Ember.Component.extend({
 			});
 
 			yAxis.render();
-		};
+		}
 	},
 
 	didInsertElement: function(){

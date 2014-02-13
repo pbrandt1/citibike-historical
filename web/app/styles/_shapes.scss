@@ -1,0 +1,33 @@
+#stripe1 {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100px;
+  height: 100%;
+  -webkit-transform: skew(20deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: #30749f;
+}
+#stripe2 {
+  position: absolute;
+  top:0;
+  left:100px;
+  width: 100px;
+  height: 100%;
+  -webkit-transform: skew(20deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: #74281e;
+}
+#stripe3 {
+  position: absolute;
+  top:0;
+  left:200px;
+  width: 100px;
+  height: 100%;
+  -webkit-transform: skew(20deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: #30749f;
+}

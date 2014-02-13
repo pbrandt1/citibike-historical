@@ -1,3 +1,10 @@
+/* Fonts */
+@font-face
+{
+  font-family: 'Monton';
+  src: url('/assets/Monoton-Regular.ttf');
+}
+
 /* Bootstrap redefines */
 @import "variables";
 
@@ -6,6 +13,17 @@
 /* Post bootstrap stuff */
 
 /* Components */
+@import "shapes";
+@import "placement";
+
+.olMap {
+  height: 600px;
+}
+
+#title {
+  font-family: 'Monoton';
+  color: #fff;
+}
 
 @keyframes domChanged { from { background: yellow; } }
 @-webkit-keyframes domChanged { from { background: yellow; } }
