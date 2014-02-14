@@ -4,13 +4,4 @@
         {{line-chart width=800 height=100 dataUrl="/bikeTotals" x="date" y="bikes_in_use"}}
     </div>
 </div>
-<div>
-    <header>Bike Usage</header>
-</div>
-<div>
-    {{#each content}}
-        <div>
-            {{stationname}}
-        </div>
-    {{/each}}
-</div>
+{{ outlet }}
