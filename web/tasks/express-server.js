@@ -38,7 +38,8 @@ module.exports = function(grunt) {
       app.all(proxyPath + '/*', passThrough(proxyURL));
     }
 
-		app.use(require('../crAPI/crAPI'));
+		// oh yeah baby, let's get those data api routes in here.
+		require('../crAPI/crAPI')(app);
 
     if (target === 'debug') {
       // For `expressServer:debug`
