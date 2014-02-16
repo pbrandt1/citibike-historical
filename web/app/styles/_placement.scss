@@ -19,3 +19,9 @@
 .relative {
   position: relative;
 }
+
+.inline-parent {
+  > div {
+    display: inline-block;
+  }
+}

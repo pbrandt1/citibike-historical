@@ -1,8 +1,14 @@
 /* Fonts */
-@font-face
-{
-  font-family: 'Monton';
-  src: url(/assets/Monoton-Regular.ttf) format('truetype');
+@font-face {
+  font-family: 'monotonregular';
+  src: url('./fonts/monoton-regular.eot');
+  src: url('./fonts/monoton-regular.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/monoton-regular.woff') format('woff'),
+  url('./fonts/monoton-regular.ttf') format('truetype'),
+  url('./fonts/monoton-regular.svg#monotonregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
 }
 
 /* Bootstrap redefines */
@@ -18,12 +24,11 @@
 
 .olMap {
   height: 600px;
-  margin: 0 20px;
+  margin: 0;
 }
 
-#title {
-  font-family: 'Monoton';
-  color: #fff;
+h1 {
+  font-size: 5.5em;
 }
 
 @keyframes domChanged { from { background: yellow; } }
