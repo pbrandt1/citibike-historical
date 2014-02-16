@@ -21,7 +21,6 @@ app.use(static({ file: 'dist/index.html', ignoredFileExtensions: /\.\w{1,5}$/ })
 
 function static(options) {
 	return function(req, res, next) { // Gotta catch 'em all (and serve index.html)
-		debugger;
 		var filePath = "";
 		if (options.directory) {
 			var regex = new RegExp('^' + (options.urlRoot || ''));
@@ -55,5 +54,5 @@ function static(options) {
 }
 
 app.listen(app.get('port'), function(){
-	console.log('listening on port', app.get('port'));
+	console.log('listening on port', app.get('port'), 'in', app.get('env'));
 });
