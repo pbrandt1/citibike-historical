@@ -132,6 +132,25 @@ export default Ember.Component.extend({
 			});
 
 			var myPositionMarker;
+			var mapManipulationInfo = {
+				lastTimestamp: 0
+			};
+
+			map.events.register('moveend', map, function() {
+				mapManipulationInfo.lastTimestamp = +new Date();
+			});
+
+			map.events.register('zoomend', map, function() {
+				mapManipulationInfo.lastTimestamp = +new Date();
+				zoomlevel = map.zoom;
+			});
+
+			var recenterMap = function(info) {
+				var timeSinceManipulated = 1000*30; // only recenter the map if the user hasn't manipulated the map in 30 seconds.
+				var now = +new Date();
+				return info.lastTimestamp < (now - timeSinceManipulated);
+			};
+
 			var drawMyPosition = function(position) {
 				var size = new OpenLayers.Size(23, 32);
 				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h/2);
@@ -145,7 +164,9 @@ export default Ember.Component.extend({
 				});
 				stations.addMarker(myPositionMarker);
 				var myPosition = new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude).transform(fromProjection, toProjection);
-				map.setCenter(myPosition, zoomlevel);
+				if (recenterMap(mapManipulationInfo)) {
+					map.setCenter(myPosition, zoomlevel);
+				}
 			};
 
 			if (navigator.geolocation) {
