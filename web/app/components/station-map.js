@@ -10,6 +10,8 @@ export default Ember.Component.extend({
 
 	draw: function() {
 		var _ = this;
+		var map;
+		var zoomlevel = 16;
 
 		if (!!_.get('data')) {
 			noSeriouslyReallyDraw();
@@ -84,8 +86,9 @@ export default Ember.Component.extend({
 			}
 		};
 
+
 		function noSeriouslyReallyDraw() {
-			var map = new OpenLayers.Map(_.get('elementId'));
+			map = new OpenLayers.Map(_.get('elementId'));
 			var osm = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
 				eventListeners: {
 					tileloaded: function(evt) {
@@ -110,18 +113,45 @@ export default Ember.Component.extend({
 			};
 
 			map.addLayer(osm);
-			map.setCenter(startingPosition, 15);
+			map.setCenter(startingPosition, zoomlevel);
 
 			var stations = new OpenLayers.Layer.Markers('Stations');
 			map.addLayer(stations);
 
-			var size = new OpenLayers.Size(21, 25);
-			var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-			var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
+			var size = new OpenLayers.Size(40, 23);
+			var offset = new OpenLayers.Pixel(-(size.w/2), -size.h/2);
+			var icon = new OpenLayers.Icon('/assets/marker-pixely.png', size, offset);
 //			debugger;
 			_.get('data').forEach(function(station) {
-				stations.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(station.longitude, station.latitude).transform(fromProjection, toProjection), icon.clone()));
+				var marker = new OpenLayers.Marker(new OpenLayers.LonLat(station.longitude, station.latitude).transform(fromProjection, toProjection), icon.clone());
+				marker.events.register('click', marker, function() {
+					console.log('clicked marker ' + station.stationid);
+					_.sendAction('action', station);
+				});
+				stations.addMarker(marker);
 			});
+
+			var myPositionMarker;
+			var drawMyPosition = function(position) {
+				var size = new OpenLayers.Size(23, 32);
+				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h/2);
+				var icon = new OpenLayers.Icon('/assets/man.png', size, offset);
+				if (myPositionMarker) {
+					stations.removeMarker(myPositionMarker);
+				}
+				myPositionMarker = new OpenLayers.Marker(new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude).transform(fromProjection, toProjection), icon.clone());
+				myPositionMarker.events.register('click', myPositionMarker, function() {
+					console.log('clicked myself ');
+				});
+				stations.addMarker(myPositionMarker);
+				var myPosition = new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude).transform(fromProjection, toProjection);
+				map.setCenter(myPosition, zoomlevel);
+			};
+
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(drawMyPosition);
+				navigator.geolocation.watchPosition(drawMyPosition);
+			}
 
 //			stations.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(-73.99027013, 40.7153077).transform(fromProjection, toProjection), icon));
 

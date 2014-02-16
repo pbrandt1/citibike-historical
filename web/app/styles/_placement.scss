@@ -4,6 +4,10 @@
   left: 0;
 }
 
+.z-bottom {
+  z-index: -100;
+}
+
 .z-top {
   z-index: 1000;
 }

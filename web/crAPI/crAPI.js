@@ -27,6 +27,7 @@ module.exports = function(router) {
 	});
 
 	router.get('/stations/:station', function(req, res) {
+		console.log('gettin station ', req.params.station);
 		var sql = 'select * from stationInfo_prc($id)'
 			.replace('$id', req.params.station);
 		mgr.queryJSON(sql)

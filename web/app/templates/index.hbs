@@ -1,5 +1,5 @@
 <div class="relative">
-    {{station-map data=content }}
+    {{station-map data=content action="clickStation"}}
     <div class="bottom-left z-top">
         {{line-chart width=800 height=100 dataUrl="/bikeTotals" x="date" y="bikes_in_use"}}
     </div>
